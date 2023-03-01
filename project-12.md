@@ -123,9 +123,8 @@ In the __static-assignment/common-del.yml__ we paste the snippet
 ```
 ---
 - name: update web, nfs and db servers
-  hosts: webservers, nfs, db
+  hosts: wbsrvrs, nfs, dbsrvr
   remote_user: ec2-user
-  become: yes
   become_user: root
   tasks:
   - name: delete wireshark
@@ -136,7 +135,6 @@ In the __static-assignment/common-del.yml__ we paste the snippet
 - name: update LB server
   hosts: lb
   remote_user: ubuntu
-  become: yes
   become_user: root
   tasks:
   - name: delete wireshark
@@ -304,37 +302,31 @@ Go into __tasks__ directory, and within the __main.yml__ file, start writing con
 ```
 ---
 - name: install apache
-  become: true
-  ansible.builtin.yum:
+  yum:
     name: "httpd"
     state: present
 
 - name: install git
-  become: true
-  ansible.builtin.yum:
+  yum:
     name: "git"
     state: present
 
 - name: clone a repo
-  become: true
-  ansible.builtin.git:
+  git:
     repo: https://github.com/<your-name>/tooling.git
     dest: /var/www/html
     force: yes
 
 - name: copy html content to one level up
-  become: true
   command: cp -r /var/www/html/html/ /var/www/
 
 - name: Start service httpd, if not started
-  become: true
-  ansible.builtin.service:
+  service:
     name: httpd
     state: started
 
 - name: recursively remove /var/www/html/html/ directory
-  become: true
-  ansible.builtin.file:
+  file:
     path: /var/www/html/html
     state: absent
 ```
