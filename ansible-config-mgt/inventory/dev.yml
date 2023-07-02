@@ -1,0 +1,24 @@
+nfs-server ansible_host=172.31.91.21 ansible_ssh_user=ec2-user 
+web01 ansible_host=172.31.93.25 ansible_ssh_user=ec2-user 
+web02 ansible_host=172.31.91.33 ansible_ssh_user=ec2-user 
+db01 ansible_host=172.31.93.36 ansible_ssh_user=ec2-user 
+load-balancer ansible_host=172.31.92.27 ansible_ssh_user=ubuntu 
+
+[nfs]
+nfs-server
+
+[webservers]
+web01
+web02
+
+[db]
+db01 
+
+[lb]
+load-balancer
+
+[all:vars]
+ansible_ssh_private_key_file=dybran-ec2.pem
+
+
+

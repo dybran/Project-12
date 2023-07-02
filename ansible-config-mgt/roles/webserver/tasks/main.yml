@@ -1,0 +1,29 @@
+---
+- name: install apache
+  yum:
+    name: "httpd"
+    state: present
+
+- name: install git
+  yum:
+    name: "git"
+    state: present
+
+- name: clone a repo
+  git:
+    repo: https://github.com/<your-name>/tooling.git
+    dest: /var/www/html
+    force: yes
+
+- name: copy html content to one level up
+  command: cp -r /var/www/html/html/ /var/www/
+
+- name: Start service httpd, if not started
+  service:
+    name: httpd
+    state: started
+
+- name: recursively remove /var/www/html/html/ directory
+  file:
+    path: /var/www/html/html
+    state: absent

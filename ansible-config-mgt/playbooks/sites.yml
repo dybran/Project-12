@@ -1,0 +1,15 @@
+# ---
+# - name: Installing wireshark
+#   hosts: all
+# - name: wireshark assignment
+#   import_playbook: ../static-assignments/common.yml
+
+- name: delete wireshark
+  hosts: all
+- name: wireshark assignment
+  import_playbook: ../static-assignments/common-del.yml
+
+- name: Webserver configurations
+  hosts: all
+- name: webserver assignment
+  import_playbook: ../static-assignments/webserver.yml
