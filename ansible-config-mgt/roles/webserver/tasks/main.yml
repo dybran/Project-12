@@ -9,9 +9,9 @@
     name: "git"
     state: present
 
-- name: clone a repo
+- name: clone repo
   git:
-    repo: https://github.com/<your-name>/tooling.git
+    repo: https://github.com/dybran/tooling.git
     dest: /var/www/html
     force: yes
 
